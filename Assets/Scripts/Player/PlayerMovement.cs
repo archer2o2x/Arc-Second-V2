@@ -48,6 +48,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnLook(InputValue context)
     {
-        PlayerLookVector = context.Get<Vector2>().normalized * PlayerLookSpeed;
+        PlayerLookVector = context.Get<Vector2>() * PlayerLookSpeed;
     }
 }
