@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
-    public static float MaxHealth;
+    public float MaxHealth;
     private float CurrHealth;
+
+    public UnityEvent OnDeath;
 
     private void Start()
     {
@@ -27,6 +30,10 @@ public class Health : MonoBehaviour
     public void Hurt(float amount)
     {
         CurrHealth = Mathf.Clamp(CurrHealth - amount, 0, MaxHealth);
+
+        if (IsDead()) OnDeath.Invoke();
+
+        // Debug.Log("hurt " + gameObject.name + " for " + amount.ToString() + " damage.");
     }
 
     /// <summary>

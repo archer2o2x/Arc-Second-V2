@@ -20,6 +20,11 @@ public class Gun : MonoBehaviour
 
     private float Timer = 0;
 
+    private void Start()
+    {
+        Reset();
+    }
+
     private void Update()
     {
         Timer -= Time.deltaTime;

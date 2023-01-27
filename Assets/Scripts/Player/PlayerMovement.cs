@@ -13,9 +13,14 @@ public class PlayerMovement : MonoBehaviour
 
     public float CharacterSpeed;
     public float PlayerLookSpeed;
+    public float PlayerJumpForce;
 
     private Vector2 PlayerMoveVector;
     private Vector2 PlayerLookVector;
+
+    public float MaxGravity;
+
+    private float PlayerVerticalAcceleration;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        PlayerVerticalAcceleration = -MaxGravity;
     }
 
     // Update is called once per frame
@@ -33,12 +40,18 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 motion = PlayerMoveVector * Time.deltaTime;
 
-        character.Move(PlayerBody.localToWorldMatrix * new Vector3(motion.x, -0.1f, motion.y));
+        character.Move(PlayerBody.localToWorldMatrix * new Vector3(motion.x, PlayerVerticalAcceleration, motion.y));
 
         Vector2 rotation = PlayerLookVector * Time.deltaTime;
 
         PlayerBody.RotateAround(PlayerBody.position, PlayerBody.up, rotation.x);
         PlayerHead.RotateAround(PlayerHead.position, PlayerHead.right, -rotation.y);
+
+        if (PlayerVerticalAcceleration == -MaxGravity) return;
+
+        PlayerVerticalAcceleration -= MaxGravity * Time.deltaTime;
+
+        if (PlayerVerticalAcceleration < -MaxGravity) PlayerVerticalAcceleration = -MaxGravity;
     }
 
     public void OnMove(InputValue context)
@@ -49,5 +62,10 @@ public class PlayerMovement : MonoBehaviour
     public void OnLook(InputValue context)
     {
         PlayerLookVector = context.Get<Vector2>() * PlayerLookSpeed;
+    }
+
+    public void OnJump()
+    {
+        PlayerVerticalAcceleration = PlayerJumpForce;
     }
 }
