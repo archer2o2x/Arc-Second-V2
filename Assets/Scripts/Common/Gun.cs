@@ -20,6 +20,8 @@ public class Gun : MonoBehaviour
 
     private float Timer = 0;
 
+    public GameObject HitEffect;
+
     private void Start()
     {
         Reset();
@@ -48,18 +50,20 @@ public class Gun : MonoBehaviour
 
         RaycastHit info;
 
+        LeftInClip--;
+
+        Timer = ChamberSpeed;
+
         if (Physics.Raycast(GunTip.position, GunTip.forward, out info, BulletRange))
         {
             Health health = info.collider.gameObject.GetComponent<Health>();
+
+            Instantiate(HitEffect, info.point, Quaternion.identity);
 
             if (health == null) return;
 
             health.Hurt(BulletDamage);
         }
-
-        Timer = ChamberSpeed;
-
-        LeftInClip--;
     }
 
     public void Reload()
@@ -69,6 +73,8 @@ public class Gun : MonoBehaviour
         if (Timer > 0) return;
 
         LeftInClip = ClipSize;
+
+        Timer = ReloadSpeed;
 
     }
 

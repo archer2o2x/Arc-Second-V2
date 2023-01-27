@@ -47,11 +47,18 @@ public class PlayerMovement : MonoBehaviour
         PlayerBody.RotateAround(PlayerBody.position, PlayerBody.up, rotation.x);
         PlayerHead.RotateAround(PlayerHead.position, PlayerHead.right, -rotation.y);
 
-        if (PlayerVerticalAcceleration == -MaxGravity) return;
+        if (!character.isGrounded)
+        {
 
-        PlayerVerticalAcceleration -= MaxGravity * Time.deltaTime;
+            if (PlayerVerticalAcceleration == -MaxGravity) return;
 
-        if (PlayerVerticalAcceleration < -MaxGravity) PlayerVerticalAcceleration = -MaxGravity;
+            PlayerVerticalAcceleration -= MaxGravity * Time.deltaTime;
+
+            if (PlayerVerticalAcceleration < -MaxGravity) PlayerVerticalAcceleration = -MaxGravity;
+        } else
+        {
+            PlayerVerticalAcceleration = 0;
+        }
     }
 
     public void OnMove(InputValue context)
