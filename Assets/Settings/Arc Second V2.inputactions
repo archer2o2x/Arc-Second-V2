@@ -29,8 +29,8 @@
                     "id": "a8f2a5e2-a973-4091-8104-50cef94e8d9e",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Reload",

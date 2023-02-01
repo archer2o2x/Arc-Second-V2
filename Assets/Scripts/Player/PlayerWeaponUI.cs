@@ -25,6 +25,15 @@ public class PlayerWeaponUI : MonoBehaviour
         PlayerWeapon.OnGunFire.AddListener(UpdateAmmo);
         PlayerWeapon.OnGunReload.AddListener(UpdateReloads);
         PlayerWeapon.OnGunReady.AddListener(UpdateReady);
+
+        Reset();
+    }
+
+    public void Reset()
+    {
+        AmmoText.text = AmmoTemplate.Replace("{AMMO}", PlayerWeapon.LeftInClip.ToString()).Replace("{MAX_AMMO}", PlayerWeapon.ClipSize.ToString());
+        ReloadText.text = ReloadTemplate.Replace("{RELOADS}", PlayerWeapon.MaxReloads.ToString());
+        StatusSprite.enabled = false;
     }
 
     public void UpdateAmmo()

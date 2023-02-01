@@ -43,8 +43,8 @@ public class Gun : MonoBehaviour
         //Timer = Timer < 0 ? 0 : Timer;
         if (Timer <= 0)
         {
-            OnGunReady.Invoke();
             Timer = 0;
+            OnGunReady.Invoke();
             State = "IDLE";
         }
     }
@@ -62,7 +62,7 @@ public class Gun : MonoBehaviour
     {
         if (IsClipEmpty()) return;
 
-        if (State != "IDLE") return;
+        if (Timer > 0) return;
 
         RaycastHit info;
 
@@ -90,7 +90,7 @@ public class Gun : MonoBehaviour
     {
         if (!IsReloadPossible()) return;
 
-        if (State != "IDLE") return;
+        if (Timer > 0) return;
 
         _LeftInClip = ClipSize;
 
