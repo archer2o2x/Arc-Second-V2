@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Gun : MonoBehaviour
 {
@@ -15,12 +16,20 @@ public class Gun : MonoBehaviour
     public float ChamberSpeed;
     public float ReloadSpeed;
 
-    private int LeftInClip;
-    private int ReloadsLeft;
+    public int LeftInClip { get { return _LeftInClip; } }
+    public int ReloadsLeft { get { return _ReloadsLeft; } }
+
+    private int _LeftInClip;
+    private int _ReloadsLeft;
 
     private float Timer = 0;
+    private string State = "IDLE";
 
     public GameObject HitEffect;
+
+    public UnityEvent OnGunFire;
+    public UnityEvent OnGunReload;
+    public UnityEvent OnGunReady;
 
     private void Start()
     {
@@ -31,28 +40,39 @@ public class Gun : MonoBehaviour
     {
         Timer -= Time.deltaTime;
 
-        Timer = Timer < 0 ? 0 : Timer;
+        //Timer = Timer < 0 ? 0 : Timer;
+        if (Timer <= 0)
+        {
+            OnGunReady.Invoke();
+            Timer = 0;
+            State = "IDLE";
+        }
     }
 
     public void Reset()
     {
-        LeftInClip = ClipSize;
-        ReloadsLeft = MaxReloads;
+        _LeftInClip = ClipSize;
+        _ReloadsLeft = MaxReloads;
 
         Timer = 0;
+        State = "IDLE";
     }
 
     public void Fire()
     {
         if (IsClipEmpty()) return;
 
-        if (Timer > 0) return;
+        if (State != "IDLE") return;
 
         RaycastHit info;
 
-        LeftInClip--;
+        _LeftInClip--;
+
+        State = "CHAMBERING";
 
         Timer = ChamberSpeed;
+
+        OnGunFire.Invoke();
 
         if (Physics.Raycast(GunTip.position, GunTip.forward, out info, BulletRange))
         {
@@ -70,21 +90,31 @@ public class Gun : MonoBehaviour
     {
         if (!IsReloadPossible()) return;
 
-        if (Timer > 0) return;
+        if (State != "IDLE") return;
 
-        LeftInClip = ClipSize;
+        _LeftInClip = ClipSize;
+
+        _ReloadsLeft--;
+
+        State = "RELOADING";
 
         Timer = ReloadSpeed;
 
+        OnGunReload.Invoke();
     }
 
     public bool IsClipEmpty()
     {
-        return LeftInClip == 0;
+        return _LeftInClip == 0;
     }
 
     public bool IsReloadPossible()
     {
-        return ReloadsLeft > 0;
+        return _ReloadsLeft > 0;
+    }
+
+    public string GetGunState()
+    {
+        return State;
     }
 }

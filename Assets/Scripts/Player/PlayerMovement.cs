@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 PlayerMoveVector;
     private Vector2 PlayerLookVector;
 
+    public float Gravity;
     public float MaxGravity;
 
     private float PlayerVerticalAcceleration;
@@ -52,12 +53,12 @@ public class PlayerMovement : MonoBehaviour
 
             if (PlayerVerticalAcceleration == -MaxGravity) return;
 
-            PlayerVerticalAcceleration -= MaxGravity * Time.deltaTime;
+            PlayerVerticalAcceleration -= Gravity * Time.deltaTime;
 
             if (PlayerVerticalAcceleration < -MaxGravity) PlayerVerticalAcceleration = -MaxGravity;
         } else
         {
-            PlayerVerticalAcceleration = 0;
+            PlayerVerticalAcceleration = -0.01f;
         }
     }
 
@@ -73,6 +74,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump()
     {
-        PlayerVerticalAcceleration = PlayerJumpForce;
+        if (character.isGrounded)
+        {
+            PlayerVerticalAcceleration = PlayerJumpForce * Time.deltaTime;
+        }
     }
 }
