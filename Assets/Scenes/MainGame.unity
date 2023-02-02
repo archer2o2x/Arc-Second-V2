@@ -3072,7 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GunTip: {fileID: 144347198}
-  BulletDamage: 0.75
+  BulletDamage: 2
   BulletRange: 50
   ClipSize: 12
   MaxReloads: 8
@@ -3132,6 +3132,7 @@ GameObject:
   - component: {fileID: 1339194697}
   - component: {fileID: 1339194702}
   - component: {fileID: 1339194703}
+  - component: {fileID: 1339194704}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3268,6 +3269,20 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1339194704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339194696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bab548b2a682348978d0293bab8ce6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 1339194703}
+  target: {fileID: 1305635848}
 --- !u!43 &1406294652
 Mesh:
   m_ObjectHideFlags: 0

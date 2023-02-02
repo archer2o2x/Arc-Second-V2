@@ -7,9 +7,9 @@ using UnityEngine.AI;
 public class MoveToNode : Leaf
 {
     private NavMeshAgent EnemyAgent;
-    private Vector3 EnemyTarget;
+    private Transform EnemyTarget;
 
-    public MoveToNode(NavMeshAgent agent, Vector3 target)
+    public MoveToNode(NavMeshAgent agent, Transform target)
     {
         EnemyAgent = agent;
         EnemyTarget = target;
@@ -17,7 +17,7 @@ public class MoveToNode : Leaf
 
     public override Status Evaluate()
     {
-        if (EnemyAgent.destination != EnemyTarget) EnemyAgent.destination = EnemyTarget;
+        if (EnemyAgent.destination != EnemyTarget.position) EnemyAgent.destination = EnemyTarget.position;
 
         if (EnemyAgent.remainingDistance <= 0) return Status.Success;
 
