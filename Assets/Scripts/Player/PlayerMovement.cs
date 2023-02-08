@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (character.isGrounded)
         {
-            PlayerVerticalAcceleration = PlayerJumpForce * Time.deltaTime;
+            PlayerVerticalAcceleration = PlayerJumpForce / 100;
         }
     }
 }

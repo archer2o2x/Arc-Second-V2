@@ -26,6 +26,7 @@ public class Gun : MonoBehaviour
     private string State = "IDLE";
 
     public GameObject HitEffect;
+    public GameObject LineEffect;
 
     public UnityEvent OnGunFire;
     public UnityEvent OnGunReload;
@@ -79,6 +80,7 @@ public class Gun : MonoBehaviour
             Health health = info.collider.gameObject.GetComponent<Health>();
 
             Instantiate(HitEffect, info.point, Quaternion.identity);
+            Instantiate(LineEffect, info.point, Quaternion.identity).GetComponent<BulletLine>().Setup(GunTip.position, info.point);
 
             if (health == null) return;
 
