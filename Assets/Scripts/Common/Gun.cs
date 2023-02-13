@@ -32,6 +32,8 @@ public class Gun : MonoBehaviour
     public UnityEvent OnGunReload;
     public UnityEvent OnGunReady;
 
+    public LayerMask NoShootLayers;
+
     private void Start()
     {
         Reset();
@@ -77,6 +79,10 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(GunTip.position, GunTip.forward, out info, BulletRange))
         {
+            if ((NoShootLayers & info.collider.gameObject.layer) != 0) { return; }
+
+            Debug.Log(info.collider.gameObject.layer);
+
             Health health = info.collider.gameObject.GetComponent<Health>();
 
             Instantiate(HitEffect, info.point, Quaternion.identity);
@@ -85,6 +91,9 @@ public class Gun : MonoBehaviour
             if (health == null) return;
 
             health.Hurt(BulletDamage);
+        } else
+        {
+            Instantiate(LineEffect, GunTip.forward * BulletRange + GunTip.position, Quaternion.identity).GetComponent<BulletLine>().Setup(GunTip.position, GunTip.position + GunTip.forward * BulletRange);
         }
     }
 

@@ -19,7 +19,7 @@ public class MoveToNode : Leaf
     {
         if (EnemyAgent.destination != EnemyTarget.position) EnemyAgent.destination = EnemyTarget.position;
 
-        if (EnemyAgent.remainingDistance <= 0) return Status.Success;
+        if (EnemyAgent.remainingDistance <= 1) return Status.Success;
 
         if (EnemyAgent.path.status == NavMeshPathStatus.PathInvalid && !EnemyAgent.pathPending) return Status.Failure;
 

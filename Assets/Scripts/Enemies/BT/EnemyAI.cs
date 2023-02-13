@@ -3,19 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 public class EnemyAI : MonoBehaviour
 {
-    public NavMeshAgent agent;
-    public Transform target;
+    public NavMeshAgent EnemyAgent;
+    public Transform EnemyTarget;
+
+    public Transform EnemyEyes;
 
     public Node behaviour;
 
     void Start()
     {
-        behaviour = new Selector(
-            new MoveToNode(agent, target)
-        );
+        behaviour =
+            new Selector(
+                new Sequence(
+                    new CanSeePlayer(EnemyEyes, EnemyTarget),
+                    new AlignToNode(EnemyTarget, EnemyEyes, 0.2f),
+                    new MoveToNode(EnemyAgent, EnemyTarget)
+                )
+            );
     }
 
     // Update is called once per frame

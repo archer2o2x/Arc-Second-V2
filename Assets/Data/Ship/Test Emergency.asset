@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EmergencyName: Thruster Cell Misaligned
   EmergencyDescription: The thruster cell has been knocked out of alignment, causing
-    a slight decrease in ship maneuverability. This may lead to an increased risk
-    of damage from stellar phenomena
+    a slight decrease in ship maneuverability. This requires the ship to slow down
+    to compensate, increasing the risk of bandit attack
   EmergencyProblems:
   - ProblemSystem: thrusters
     ProblemEffectTag: misaligned

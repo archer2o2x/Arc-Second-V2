@@ -1,45 +1,97 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public abstract class BaseSystem : MonoBehaviour
+public class BaseSystem : MonoBehaviour
 {
-    public List<string> SystemNegativeTags { get => _NegativeTags; }
-    public List<string> SystemPositiveTags { get => _PositiveTags; }
+    [HideInInspector]
+    public List<string> SystemTags { get => _SystemTags; }
 
-    protected List<string> _NegativeTags;
-    protected List<string> _PositiveTags;
+    [SerializeField]
+    protected List<string> _SystemTags;
+    [SerializeField]
+    public BaseTagRule[] TagRules;
 
-    public abstract void ProcessNegativeTags();
+    public UnityEvent OnTagCreate;
+    public UnityEvent OnTagDestruction;
+
+
+
+    private void OnCreate(string newtag)
+    {
+        foreach (BaseTagRule rule in TagRules)
+        {
+            if (rule.TriggerTagEvent != BaseTagRule.TriggerState.OnCreation) continue;
+
+            if (rule.TriggerTag != newtag) continue;
+
+            switch (rule.TargetEffectOperations)
+            {
+                case BaseTagRule.TargetEffect.AddTrigger: AddTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.AddTarget: AddTag(rule.TargetTag); break;
+                case BaseTagRule.TargetEffect.RemoveTrigger: RemoveTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.RemoveTarget: RemoveTag(rule.TargetTag); break;
+                case BaseTagRule.TargetEffect.IfTargetAddTrigger: if (HasTag(rule.TargetTag)) AddTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.IfTargetRemoveTrigger: if (!HasTag(rule.TargetTag)) AddTag(rule.TriggerTag); break;
+            }
+        }
+
+        OnTagCreate.Invoke();
+    }
+
+    private void OnDestruction(string newtag)
+    {
+        foreach (BaseTagRule rule in TagRules)
+        {
+            if (rule.TriggerTagEvent != BaseTagRule.TriggerState.OnDestruction) continue;
+
+            if (rule.TriggerTag != newtag) continue;
+
+            switch (rule.TargetEffectOperations)
+            {
+                case BaseTagRule.TargetEffect.AddTrigger: AddTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.AddTarget: AddTag(rule.TargetTag); break;
+                case BaseTagRule.TargetEffect.RemoveTrigger: RemoveTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.RemoveTarget: RemoveTag(rule.TargetTag); break;
+                case BaseTagRule.TargetEffect.IfTargetAddTrigger: if (!HasTag(rule.TargetTag)) RemoveTag(rule.TriggerTag); break;
+                case BaseTagRule.TargetEffect.IfTargetRemoveTrigger: if (HasTag(rule.TargetTag)) RemoveTag(rule.TriggerTag); break;
+            }
+        }
+
+        OnTagDestruction.Invoke();
+    }
+
 
     #region HELPER FUNCS
-    public bool HasNegativeTag(string tag)
+    private bool HasTag(string tag)
     {
-        return _NegativeTags.Contains(tag);
-    }
-    public bool HasPositiveTag(string tag)
-    {
-        return _PositiveTags.Contains(tag);
+        return _SystemTags.Contains(tag);
     }
 
-    public void AddNegativeTag(string tag)
+    private void AddTag(string tag)
     {
-        _NegativeTags.Add(tag);
+        if (!HasTag(tag)) _SystemTags.Add(tag);
     }
 
-    public void AddPositiveTag(string tag)
+    private void RemoveTag(string tag)
     {
-        _PositiveTags.Add(tag);
+        _SystemTags.Remove(tag);
     }
 
-    public void RemoveNegativeTag(string tag)
+    public bool SystemHasTag(string tag)
     {
-        _NegativeTags.Remove(tag);
+        return _SystemTags.Contains(tag);
     }
 
-    public void RemovePositiveTag(string tag)
+    public void SystemAddTag(string tag)
     {
-        _PositiveTags.Remove(tag);
+        OnCreate(tag);
+    }
+
+    public void SystemRemoveTag(string tag)
+    {
+        OnDestruction(tag);
     }
 
     #endregion
