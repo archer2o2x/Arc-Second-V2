@@ -11,10 +11,23 @@ public class GunAnimator : MonoBehaviour
     private void Start()
     {
         PlayerGunAnimator.SetFloat("Fire Speed", 1 / PlayerWeapon.ChamberSpeed);
+        PlayerGunAnimator.SetFloat("Reload Speed", 1 / PlayerWeapon.ReloadSpeed);
     }
 
     public void OnGunFire()
     {
         PlayerGunAnimator.SetTrigger("Fire");
+    }
+
+    public void OnGunReload()
+    {
+        PlayerGunAnimator.SetBool("Reloading", true);
+        PlayerWeapon.OnGunReady.AddListener(OnGunReady);
+    }
+
+    public void OnGunReady()
+    {
+        PlayerGunAnimator.SetBool("Reloading", false);
+        PlayerWeapon.OnGunReady.RemoveListener(OnGunReady);
     }
 }

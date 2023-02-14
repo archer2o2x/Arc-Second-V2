@@ -79,7 +79,7 @@ public class Gun : MonoBehaviour
 
         if (Physics.Raycast(GunTip.position, GunTip.forward, out info, BulletRange))
         {
-            if ((NoShootLayers & info.collider.gameObject.layer) != 0) { return; }
+
 
             Debug.Log(info.collider.gameObject.layer);
 

@@ -86,29 +86,29 @@ LineRenderer:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: 0
-        outSlope: 0
+        inSlope: -0.29279894
+        outSlope: -0.29279894
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0.9697802
       - serializedVersion: 3
-        time: 0.7585438
-        value: 0
-        inSlope: -0.37814018
-        outSlope: -0.37814018
+        time: 1
+        value: 0.5123457
+        inSlope: -0.47530866
+        outSlope: -0.47530866
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.25465232
+        inWeight: 1
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 0.77884895, b: 0, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+      key1: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0.78431374}
+      key2: {r: 0, g: 0, b: 0, a: 0.39215687}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -123,16 +123,16 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
-      atime3: 0
+      atime1: 25636
+      atime2: 53585
+      atime3: 65535
       atime4: 0
       atime5: 0
       atime6: 0
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 4
     numCornerVertices: 0
     numCapVertices: 5
     alignment: 0
@@ -153,4 +153,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc1c997223e59d4db785261cdea787c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeLength: 1
+  FadeLength: 0.2
