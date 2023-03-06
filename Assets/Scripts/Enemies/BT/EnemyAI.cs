@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
             new Selector(
                 new Sequence(
                     new CanSeePlayer(EnemyEyes, EnemyTarget),
-                    new AlignToNode(EnemyTarget, EnemyEyes, 0.2f),
+                    new AlignToNode(EnemyTarget, EnemyEyes, 0.1f),
                     new MoveToNode(EnemyAgent, EnemyTarget)
                 )
             );
