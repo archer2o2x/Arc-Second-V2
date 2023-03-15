@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227002354057328501}
-  m_Mesh: {fileID: -1803783847952078627, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: -1803783847952078627, guid: 97f7fe835275571468966a544f3172c7, type: 3}
 --- !u!23 &3591607884051362738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -99,7 +99,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -1803783847952078627, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: -1803783847952078627, guid: 97f7fe835275571468966a544f3172c7, type: 3}
 --- !u!1 &2502188712006318767
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +175,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2770929940517088593}
-  m_Mesh: {fileID: 5101374260679542595, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: 5101374260679542595, guid: 97f7fe835275571468966a544f3172c7, type: 3}
 --- !u!23 &2914554098385650769
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -233,7 +233,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 5101374260679542595, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: 5101374260679542595, guid: 97f7fe835275571468966a544f3172c7, type: 3}
 --- !u!1 &5719584490598108028
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +275,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5719584490598108028}
-  m_Mesh: {fileID: 5535616678529459285, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: 5535616678529459285, guid: 97f7fe835275571468966a544f3172c7, type: 3}
 --- !u!23 &5028807066694729370
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -332,4 +332,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 5535616678529459285, guid: c6d809ffccccf0c4787ab66a4793c2a6, type: 3}
+  m_Mesh: {fileID: 5535616678529459285, guid: 97f7fe835275571468966a544f3172c7, type: 3}
