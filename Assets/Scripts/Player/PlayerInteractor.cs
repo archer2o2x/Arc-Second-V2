@@ -10,6 +10,8 @@ public class PlayerInteractor : MonoBehaviour
 
     public PlayerToolbelt Toolbelt;
 
+    public PlayerInteractorUI Visualiser;
+
     void OnInteract()
     {
         RaycastHit info;
@@ -24,5 +26,23 @@ public class PlayerInteractor : MonoBehaviour
                 Toolbelt.TryPickupItem(ItemObj);
             }
         }
+    }
+
+    void Update()
+    {
+        RaycastHit info;
+
+        if (Physics.Raycast(GunTip.position, GunTip.forward, out info, InteractDistance))
+        {
+            if (info.collider.gameObject.tag != "Interactable") return;
+
+            Item ItemObj = info.collider.GetComponent<Item>();
+            if (ItemObj != null)
+            {
+                Visualiser.ShowItemName(ItemObj, info.collider.transform.position);
+                return;
+            }
+        }
+        Visualiser.HideItemName();
     }
 }
