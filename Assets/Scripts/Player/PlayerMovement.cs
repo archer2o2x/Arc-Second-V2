@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float PlayerVerticalAcceleration;
 
+    private bool ShouldMove = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!ShouldMove) return;
+
         Vector2 motion = PlayerMoveVector * Time.deltaTime;
 
         character.Move(PlayerBody.localToWorldMatrix * new Vector3(motion.x, PlayerVerticalAcceleration, motion.y));
@@ -78,5 +82,10 @@ public class PlayerMovement : MonoBehaviour
         {
             PlayerVerticalAcceleration = PlayerJumpForce / 100;
         }
+    }
+
+    public void OnPadUse(InputValue context)
+    {
+        ShouldMove = context.Get<float>() < 0.5;
     }
 }

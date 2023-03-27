@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Gun : MonoBehaviour
 {
     public Transform GunTip;
+    public Transform CosmeticGunTip;
 
     public float BulletDamage;
     public float BulletRange;
@@ -86,14 +87,14 @@ public class Gun : MonoBehaviour
             Health health = info.collider.gameObject.GetComponent<Health>();
 
             Instantiate(HitEffect, info.point, Quaternion.identity);
-            Instantiate(LineEffect, info.point, Quaternion.identity).GetComponent<BulletLine>().Setup(GunTip.position, info.point);
+            Instantiate(LineEffect, info.point, Quaternion.identity).GetComponent<BulletLine>().Setup(CosmeticGunTip.position, info.point);
 
             if (health == null) return;
 
             health.Hurt(BulletDamage);
         } else
         {
-            Instantiate(LineEffect, GunTip.forward * BulletRange + GunTip.position, Quaternion.identity).GetComponent<BulletLine>().Setup(GunTip.position, GunTip.position + GunTip.forward * BulletRange);
+            Instantiate(LineEffect, GunTip.forward * BulletRange + GunTip.position, Quaternion.identity).GetComponent<BulletLine>().Setup(CosmeticGunTip.position, GunTip.position + GunTip.forward * BulletRange);
         }
     }
 

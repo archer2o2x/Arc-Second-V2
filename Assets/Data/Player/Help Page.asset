@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dc5d25520963f94d9ee5623393afa03, type: 3}
+  m_Name: Help Page
+  m_EditorClassIdentifier: 
+  PageContent: 'Use the arrow key to navigate around this datapad
+
+
+    Left / Right
+    will loop around the current section you''re in.
+
+
+    Down will lower you into
+    the subsection below the current page.
+
+
+    Up will raise you into the section
+    above the current page.'
+  PageSection: Help
+  PrevPage: {fileID: 0}
+  NextPage: {fileID: 11400000, guid: 578bfadc91ace504daf097668189f48a, type: 2}
+  HomePage: {fileID: 0}
+  InfoPage: {fileID: 0}
